@@ -101,15 +101,21 @@ a {
     display: inline-block;
     line-height: 1em; }
 
+.head {
+  font-size: 3.5rem; }
+
+.subhead {
+  font-size: 1.35rem; }
+
 #navbar {
   padding: 2rem;
-  position: absolute;
+  position: fixed;
   top: 0; }
   #navbar img {
     height: 2.25rem; }
 
 #landing {
-  position: relative;
+  position: fixed;
   height: 100vh;
   width: 100vw; }
   #landing #landing-content {
@@ -117,21 +123,63 @@ a {
     #landing #landing-content #landing-head {
       margin-bottom: 1rem;
       font-size: 3.5rem; }
-    #landing #landing-content #landing-subhead {
+    #landing #landing-content #landing-subhead, #landing #landing-content #landing-subhead-2 {
       font-size: 1.35rem; }
     #landing #landing-content p {
       font-size: 1.35rem; }
 
+#telescope {
+  height: 100%;
+  width: 100%;
+  box-sizing: border-box;
+  position: fixed;
+  color: white;
+  top: 0 !important;
+  padding: 0 15vw;
+  opacity: 0;
+  -webkit-transition: all 0.4s ease;
+  -moz-transition: all 0.4s ease;
+  -ms-transition: all 0.4s ease;
+  -o-transition: all 0.4s ease;
+  transition: all 0.4s ease; }
+  #telescope #telescope-head, #telescope #telescope-number {
+    position: relative;
+    margin-bottom: 1rem; }
+  #telescope #telescope-color {
+    position: relative;
+    height: 5rem;
+    background-color: #404e5c; }
+
 @keyframes noise-anim {
   0% {
-    clip: rect(15px, 9999px, 14px, 0); }
+    clip: rect(93px, 9999px, 8px, 0); }
+  6.66667% {
+    clip: rect(64px, 9999px, 23px, 0); }
+  13.33333% {
+    clip: rect(81px, 9999px, 57px, 0); }
   20% {
-    clip: rect(49px, 9999px, 94px, 0); }
+    clip: rect(87px, 9999px, 34px, 0); }
+  26.66667% {
+    clip: rect(76px, 9999px, 18px, 0); }
+  33.33333% {
+    clip: rect(43px, 9999px, 5px, 0); }
   40% {
-    clip: rect(94px, 9999px, 52px, 0); }
+    clip: rect(59px, 9999px, 52px, 0); }
+  46.66667% {
+    clip: rect(34px, 9999px, 37px, 0); }
+  53.33333% {
+    clip: rect(71px, 9999px, 99px, 0); }
   60% {
-    clip: rect(13px, 9999px, 39px, 0); }
+    clip: rect(55px, 9999px, 46px, 0); }
+  66.66667% {
+    clip: rect(11px, 9999px, 24px, 0); }
+  73.33333% {
+    clip: rect(82px, 9999px, 3px, 0); }
   80% {
-    clip: rect(67px, 9999px, 28px, 0); }
+    clip: rect(65px, 9999px, 27px, 0); }
+  86.66667% {
+    clip: rect(47px, 9999px, 70px, 0); }
+  93.33333% {
+    clip: rect(51px, 9999px, 37px, 0); }
   100% {
-    clip: rect(31px, 9999px, 18px, 0); } }
+    clip: rect(25px, 9999px, 70px, 0); } }

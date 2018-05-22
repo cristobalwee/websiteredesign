@@ -113,9 +113,17 @@ a {
   }
 }
 
+.head {
+  font-size: 3.5rem;
+}
+
+.subhead {
+  font-size: 1.35rem;
+}
+
 #navbar {
   padding: 2rem;
-  position: absolute;
+  position: fixed;
   top: 0;
 
   img {
@@ -124,7 +132,7 @@ a {
 }
 
 #landing {
-  position: relative;
+  position: fixed;
   height: 100vh;
   width: 100vw;
 
@@ -136,7 +144,7 @@ a {
       font-size: 3.5rem;
     }
 
-    #landing-subhead {
+    #landing-subhead, #landing-subhead-2 {
       font-size: 1.35rem;
     }
 
@@ -146,9 +154,33 @@ a {
   }
 }
 
+#telescope {
+  height: 100%;
+  width: 100%;
+  box-sizing: border-box;
+  position: fixed;
+  color: white;
+  //display: none;
+  top: 0 !important;
+  padding: 0 15vw;
+  opacity: 0;
+  @include transition(all 0.4s ease);
+
+  #telescope-head, #telescope-number {
+    position: relative;
+    margin-bottom: 1rem;
+  }
+
+  #telescope-color {
+    position: relative;
+    height: 5rem;
+    background-color: #404e5c;
+  }
+}
+
 
 @keyframes noise-anim{
-  $steps: 5;
+  $steps: 15;
   @for $i from 0 through $steps {
     #{percentage($i * (1/$steps))} {
       clip: rect(random(100) + px, 9999px, random(100) + px, 0);
