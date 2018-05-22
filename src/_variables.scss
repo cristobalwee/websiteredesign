@@ -1,0 +1,11 @@
+@font-face {
+    font-family: 'Jaapokki';
+    src: url('/public/media/jaapokki/jaapokki-regular.eot');
+    src: url('/public/media/jaapokki/jaapokki-regular.woff') format('woff'),
+        url('/public/media/jaapokki/jaapokki-regular.ttf') format('truetype'),
+        url('/public/media/jaapokki/jaapokki-regular.svg') format('svg');
+}
+
+$font-primary: 'Jaapokki', sans-serif;
+$gray: #424242;
+$light-gray: #898989;
