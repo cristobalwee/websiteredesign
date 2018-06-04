@@ -18,13 +18,49 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      loading: true,
+      loaded: 0,
       scrollFlag: true,
       currPos: 0,
-      modalOpen: false
+      modalOpen: false,
+      positions: [
+        "#landing",
+        "#punchbuddy",
+        "#telescope",
+        "#godaddy",
+        "#gastronomads",
+        "#this"
+      ],
+      targets: [
+        ["#landing-head", "#landing-sub-head", "#landing-2-sub-head"],
+        ["#about-head", "#about-info", "#about-contact"],
+        ["#telescope-info", "#telescope-photo"],
+        ["#godaddy-info", "#godaddy-photo"],
+        ["#gastronomads-info", "#gastronomads-photo"],
+        ["#foodful-info", "#foodful-photo"],
+        ["#contact-head", "#contact-sub-head", "#contact-links"]
+      ]
     };
   }
 
   componentDidMount() {
+    this.tweenIn(['.letter-hello'], 0);
+    anime({
+      targets: '#underline',
+      opacity: 1,
+      duration: 250,
+      easing: 'easeOutCubic',
+      offset: 500
+    });
+    anime({
+      targets: '#navbar',
+      opacity: 1,
+      duration: 600,
+      translateY: [15, 0],
+      easing: 'easeOutCubic',
+      offset: 1000
+    });
+
     let flag = true;
 
     $("body").bind("mousewheel", (e) => {
@@ -44,18 +80,6 @@ class App extends Component {
   }
 
   tweenUp(targets, delay) {
-    // targets.map((target, i) => {
-    //   anime({
-    //     targets: target,
-    //     top: -30,
-    //     opacity: 0,
-    //     duration: 400,
-    //     easing: 'easeInOutQuint',
-    //     delay: function(el, i) {
-    //       return 100 + 25 * i;
-    //     }
-    //   });
-    // });
     anime.timeline({loop: false})
       .add({
         targets: targets,
@@ -87,37 +111,70 @@ class App extends Component {
   }
 
   tweenIn(targets, delay) {
-    targets.map((target, i) => {
-      anime({
-        targets: target,
-        top: [20, 0],
+    anime.timeline({loop: false})
+      .add({
+        targets: targets,
+        translateY: [10, 0],
         opacity: [0, 1],
+        easing: "easeOutCubic",
         duration: 400,
-        easing: 'easeOutBack',
-        offset: (i * 100),
-        delay: delay
+        offset: 100,
+        delay: function(el, i) {
+          return 300 + 30 * i;
+        }
       });
+  }
+
+  tweenColor(targets, color) {
+    anime({
+      targets: targets,
+      backgroundColor: color,
+      duration: 800,
+      easing: 'easeOutCubic',
+      offset: 1000
     });
   }
 
-  scroll(flag) {
+  resetTween(object) {
+    $(object).css("top", "0");
+    $(object).css("opacity", "1");
+  }
+
+  hide(object, time) {
+    $(object).css("display", "none");
+  }
+
+  show(object, time) {
+    $(object).css("display", "block");
+  }
+
+  renderNext(curr, next, targetsOut, targetsIn) {
+    console.log(curr + " " + next + " " + targetsIn + " " + targetsOut);
+    this.setState({ currPos: next });
+  }
+
+  scroll(down) {
     let position = this.state.currPos;
-    if (this.state.modalOpen) {
-      this.setState({ modalOpen: false });
-    }
+    // if (this.state.modalOpen) {
+    //   this.setState({ modalOpen: false });
+    // }
 
-    if (flag) {
-      let tl = anime.timeline({
-        loop: false
-      });
-      $('#underline').css('opacity', 0);
-      this.tweenUp(['.letter'], 0);
-      $('#telescope').css('opacity', 1);
-      this.tweenIn(['#telescope-number', '#telescope-head', '#telescope-color'], 800);
-    } else {
-      if (this.state.currPos === 1) {
-
+    if (down) {
+      if (this.state.currPos === 6) {
+        return;
       }
+
+      this.renderNext(this.state.currPos, this.state.currPos + 1, this.state.targets[this.state.currPos], this.state.targets[this.state.currPos + 1]);
+
+      $('#underline').css('opacity', 0);
+      this.tweenUp(['.letter-hello'], 0);
+      this.tweenColor('#color', '#3fb54f');
+    } else {
+      if (this.state.currPos === 0) {
+        return;
+      }
+
+      this.renderNext(this.state.currPos, this.state.currPos - 1, this.state.targets[this.state.currPos], this.state.targets[this.state.currPos - 1]);
     }
   }
 
@@ -125,9 +182,7 @@ class App extends Component {
     return (
       <div className="container">
         <div id="landing">
-          <Draggable
-            className="content"
-            defaultPosition={{x: 50, y: 50}}>
+          <Draggable defaultPosition={{x: 50, y: 50}}>
             <div className="modal" style={this.state.modalOpen ? {display: 'block'} : {display: 'none'}}>
               <a className="close" onClick={() => {
                 let flag = this.state.modalOpen;
@@ -139,27 +194,55 @@ class App extends Component {
           </Draggable>
           <div id="landing-content" className="content">
             <h2 className="letter-container">
-              <span className="letter">H</span>
-              <span className="letter">e</span>
-              <span className="letter">l</span>
-              <span className="letter">l</span>
-              <span className="letter">o</span> &nbsp;
+              <span className="letter-hello">H</span>
+              <span className="letter-hello">e</span>
+              <span className="letter-hello">l</span>
+              <span className="letter-hello">l</span>
+              <span className="letter-hello">o</span> &nbsp;
               <a onClick={() => {
                 let flag = this.state.modalOpen;
                 $('.modal').css('opacity', '1');
                 this.setState({ modalOpen: !flag });
                 }}>
-                <span className="letter">t</span>
-                <span className="letter">h</span>
-                <span className="letter">e</span>
-                <span className="letter">r</span>
-                <span className="letter">e</span><br></br>
+                <span className="letter-hello">t</span>
+                <span className="letter-hello">h</span>
+                <span className="letter-hello">e</span>
+                <span className="letter-hello">r</span>
+                <span className="letter-hello">e</span><br></br>
                 <img id="underline" src={underline}></img>
               </a>
             </h2>
           </div>
-          <div id="works" className="content">
-
+        </div>
+        <div id="works">
+          <div id="works-container" className="content">
+            <div id="color"></div>
+            <h1 className="letter-container">
+              <span className="letter-telescope">T</span>
+              <span className="letter-telescope">e</span>
+              <span className="letter-telescope">l</span>
+              <span className="letter-telescope">e</span>
+              <span className="letter-telescope">s</span>
+              <span className="letter-telescope">c</span>
+              <span className="letter-telescope">o</span>
+              <span className="letter-telescope">p</span>
+              <span className="letter-telescope">e</span>
+            </h1>
+          </div>
+        </div>
+        <div id="telescope">
+          <div id="works-content" className="content">
+            <h1 className="letter-container">
+              <span className="letter-telescope">T</span>
+              <span className="letter-telescope">e</span>
+              <span className="letter-telescope">l</span>
+              <span className="letter-telescope">e</span>
+              <span className="letter-telescope">s</span>
+              <span className="letter-telescope">c</span>
+              <span className="letter-telescope">o</span>
+              <span className="letter-telescope">p</span>
+              <span className="letter-telescope">e</span>
+            </h1>
           </div>
         </div>
         <div id="navbar">

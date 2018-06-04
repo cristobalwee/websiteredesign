@@ -88,34 +88,7 @@ p {
   font-family: 'Inconsolata', monospace;
 }
 
-.glitch {
-  color: white;
-  position: relative;
-  margin: 0 auto;
-  cursor: help;
-  font-size: 3rem;
-
-  &:hover {
-    &:after {
-      animation: none;
-    }
-  }
-
-  &:after {
-    content: attr(data-text);
-    position: absolute;
-    left: 2px;
-    text-shadow: -1px 0 #13c5cf;
-    top: 0;
-    color: white;
-    background: black;
-    overflow: hidden;
-    clip: rect(0,900px,0,0);
-    animation: noise-anim 2s infinite linear alternate-reverse;
-  }
-}
-
-.letter {
+.letter-hello, .letter-telescope, .letter-godaddy, .letter-gastronomads, .letter-punch, .letter-this {
   position: relative;
   display: inline-block;
 }
@@ -126,34 +99,12 @@ p {
 
 #underline {
   position: absolute;
+  opacity: 0;
   bottom: 0;
   width: 5.5rem;
   margin-left: 6px;
   @include transition(all 0.25s ease);
   @include transform(translateY(-10px));
-}
-
-.scroll {
-  position: absolute;
-  width: 100%;
-  bottom: 0;
-  text-align: center;
-
-  img {
-    height: 3rem;
-    width: 0.5rem;
-    @include transform(translateY(20%));
-  }
-}
-
-.fadeup {
-  overflow: hidden;
-  position: relative;
-
-  .letter {
-    display: inline-block;
-    line-height: 1em;
-  }
 }
 
 .head {
@@ -197,9 +148,25 @@ p {
   position: fixed;
   bottom: 0;
   text-align: center;
+  opacity: 0;
 
   img {
     height: 1.5rem;
+  }
+}
+
+#loader {
+  text-align: center;
+  position: fixed;
+  height: 100vh;
+  width: 100vw;
+  @include transition(all 0.25s ease);
+
+  > p {
+    font-family: 'Libre Barcode 39 Extended Text', monospace;
+    text-align: center;
+    font-size: 2.5rem;
+    position: relative;
   }
 }
 
@@ -210,49 +177,40 @@ p {
 
   #landing-content {
     text-align: center;
+  }
+}
 
-    #landing-head {
-      margin-bottom: 1rem;
-      font-size: 3.5rem;
-      text-align: center;
-    }
+#works {
+  position: fixed;
+  height: 100vh;
+  width: 100vw;
+  z-index: -1;
+  opacity: 1;
+  display: none;
+  top: 0 !important;
 
-    #landing-subhead, #landing-subhead-2 {
-      font-size: 1.35rem;
+  #works-container {
+    height: 35vh;
+    text-align: center;
+
+    #color {
+      width: 30vw;
+      height: 35vh;
+      display: inline-block;
+      position: absolute;
+      left: 50%;
+      @include transform(translateX(-50%));
+      background-color: #404e5c;
+      z-index: -1;
     }
   }
 }
 
 #telescope {
-  height: 100%;
-  width: 100%;
-  box-sizing: border-box;
+  height: 100vh;
+  width: 100vw;
   position: fixed;
-  color: white;
-  //display: none;
+  opacity: 1;
+  display: none;
   top: 0 !important;
-  padding: 0 15vw;
-  opacity: 0;
-  @include transition(all 0.4s ease);
-
-  #telescope-head, #telescope-number {
-    position: relative;
-    margin-bottom: 1rem;
-  }
-
-  #telescope-color {
-    position: relative;
-    height: 5rem;
-    background-color: #404e5c;
-  }
-}
-
-
-@keyframes noise-anim{
-  $steps: 15;
-  @for $i from 0 through $steps {
-    #{percentage($i * (1/$steps))} {
-      clip: rect(random(100) + px, 9999px, random(100) + px, 0);
-    }
-  }
 }

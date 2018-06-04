@@ -79,27 +79,7 @@ h2 {
 p {
   font-family: 'Inconsolata', monospace; }
 
-.glitch {
-  color: white;
-  position: relative;
-  margin: 0 auto;
-  cursor: help;
-  font-size: 3rem; }
-  .glitch:hover:after {
-    animation: none; }
-  .glitch:after {
-    content: attr(data-text);
-    position: absolute;
-    left: 2px;
-    text-shadow: -1px 0 #13c5cf;
-    top: 0;
-    color: white;
-    background: black;
-    overflow: hidden;
-    clip: rect(0, 900px, 0, 0);
-    animation: noise-anim 2s infinite linear alternate-reverse; }
-
-.letter {
+.letter-hello, .letter-telescope, .letter-godaddy, .letter-gastronomads, .letter-punch, .letter-this {
   position: relative;
   display: inline-block; }
 
@@ -108,6 +88,7 @@ p {
 
 #underline {
   position: absolute;
+  opacity: 0;
   bottom: 0;
   width: 5.5rem;
   margin-left: 6px;
@@ -121,27 +102,6 @@ p {
   -ms-transform: translateY(-10px);
   -webkit-transform: translateY(-10px);
   transform: translateY(-10px); }
-
-.scroll {
-  position: absolute;
-  width: 100%;
-  bottom: 0;
-  text-align: center; }
-  .scroll img {
-    height: 3rem;
-    width: 0.5rem;
-    -moz-transform: translateY(20%);
-    -o-transform: translateY(20%);
-    -ms-transform: translateY(20%);
-    -webkit-transform: translateY(20%);
-    transform: translateY(20%); }
-
-.fadeup {
-  overflow: hidden;
-  position: relative; }
-  .fadeup .letter {
-    display: inline-block;
-    line-height: 1em; }
 
 .head {
   font-size: 3.5rem; }
@@ -174,9 +134,26 @@ p {
   width: 100%;
   position: fixed;
   bottom: 0;
-  text-align: center; }
+  text-align: center;
+  opacity: 0; }
   #navbar img {
     height: 1.5rem; }
+
+#loader {
+  text-align: center;
+  position: fixed;
+  height: 100vh;
+  width: 100vw;
+  -webkit-transition: all 0.25s ease;
+  -moz-transition: all 0.25s ease;
+  -ms-transition: all 0.25s ease;
+  -o-transition: all 0.25s ease;
+  transition: all 0.25s ease; }
+  #loader > p {
+    font-family: 'Libre Barcode 39 Extended Text', monospace;
+    text-align: center;
+    font-size: 2.5rem;
+    position: relative; }
 
 #landing {
   position: fixed;
@@ -184,65 +161,36 @@ p {
   width: 100vw; }
   #landing #landing-content {
     text-align: center; }
-    #landing #landing-content #landing-head {
-      margin-bottom: 1rem;
-      font-size: 3.5rem;
-      text-align: center; }
-    #landing #landing-content #landing-subhead, #landing #landing-content #landing-subhead-2 {
-      font-size: 1.35rem; }
+
+#works {
+  position: fixed;
+  height: 100vh;
+  width: 100vw;
+  z-index: -1;
+  opacity: 1;
+  display: none;
+  top: 0 !important; }
+  #works #works-container {
+    height: 35vh;
+    text-align: center; }
+    #works #works-container #color {
+      width: 30vw;
+      height: 35vh;
+      display: inline-block;
+      position: absolute;
+      left: 50%;
+      -moz-transform: translateX(-50%);
+      -o-transform: translateX(-50%);
+      -ms-transform: translateX(-50%);
+      -webkit-transform: translateX(-50%);
+      transform: translateX(-50%);
+      background-color: #404e5c;
+      z-index: -1; }
 
 #telescope {
-  height: 100%;
-  width: 100%;
-  box-sizing: border-box;
+  height: 100vh;
+  width: 100vw;
   position: fixed;
-  color: white;
-  top: 0 !important;
-  padding: 0 15vw;
-  opacity: 0;
-  -webkit-transition: all 0.4s ease;
-  -moz-transition: all 0.4s ease;
-  -ms-transition: all 0.4s ease;
-  -o-transition: all 0.4s ease;
-  transition: all 0.4s ease; }
-  #telescope #telescope-head, #telescope #telescope-number {
-    position: relative;
-    margin-bottom: 1rem; }
-  #telescope #telescope-color {
-    position: relative;
-    height: 5rem;
-    background-color: #404e5c; }
-
-@keyframes noise-anim {
-  0% {
-    clip: rect(7px, 9999px, 7px, 0); }
-  6.66667% {
-    clip: rect(100px, 9999px, 71px, 0); }
-  13.33333% {
-    clip: rect(41px, 9999px, 12px, 0); }
-  20% {
-    clip: rect(13px, 9999px, 99px, 0); }
-  26.66667% {
-    clip: rect(86px, 9999px, 78px, 0); }
-  33.33333% {
-    clip: rect(86px, 9999px, 5px, 0); }
-  40% {
-    clip: rect(37px, 9999px, 5px, 0); }
-  46.66667% {
-    clip: rect(21px, 9999px, 8px, 0); }
-  53.33333% {
-    clip: rect(86px, 9999px, 8px, 0); }
-  60% {
-    clip: rect(87px, 9999px, 45px, 0); }
-  66.66667% {
-    clip: rect(41px, 9999px, 76px, 0); }
-  73.33333% {
-    clip: rect(73px, 9999px, 3px, 0); }
-  80% {
-    clip: rect(27px, 9999px, 75px, 0); }
-  86.66667% {
-    clip: rect(20px, 9999px, 22px, 0); }
-  93.33333% {
-    clip: rect(14px, 9999px, 95px, 0); }
-  100% {
-    clip: rect(33px, 9999px, 14px, 0); } }
+  opacity: 1;
+  display: none;
+  top: 0 !important; }
