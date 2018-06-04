@@ -7,6 +7,10 @@ import logo from './media/logo.svg';
 import line from './media/line.svg';
 import Project from './components/project.js';
 
+// https://kentatoshikura.com/
+// https://theorosel.com/
+// https://gijsroge.github.io/tilt.js/
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -104,9 +108,7 @@ class App extends Component {
         </div>
         <div id="landing">
           <div id="landing-content" className="content">
-            <span id="landing-head" className="glitch block fadeup" data-text="Hello there,">Hello there,</span>
-            <span id="landing-subhead" className="glitch block fadeup" data-text="My name is Cristobal Graña, and I’m a">My name is Cristobal Graña, and I’m a</span>
-            <span id="landing-subhead-2" className="glitch block fadeup" data-text="student at UIUC">student at UIUC</span>
+            Hello there
           </div>
         </div>
         <div id="telescope" className="project">
