@@ -10,6 +10,7 @@ import Project from './components/project.js';
 // https://kentatoshikura.com/
 // https://theorosel.com/
 // https://gijsroge.github.io/tilt.js/
+// https://codepen.io/frontnerd/pen/JGwvYq
 
 class App extends Component {
   constructor(props) {
@@ -43,12 +44,13 @@ class App extends Component {
     targets.map((target, i) => {
       anime({
         targets: target,
-        top: -20,
+        top: -30,
         opacity: 0,
         duration: 400,
-        easing: 'easeInBack',
-        offset: (i * 100),
-        delay: delay
+        easing: 'easeInOutQuint',
+        delay: function(el, i) {
+          return 100 + 30 * i;
+        }
       });
     });
   }
@@ -86,11 +88,10 @@ class App extends Component {
     let position = this.state.currPos;
 
     if (flag) {
-      $("span").removeClass("glitch");
       let tl = anime.timeline({
         loop: false
       })
-      this.tweenUp(['#landing-head', '#landing-subhead', '#landing-subhead-2'], 0);
+      this.tweenUp(['.letter'], 0);
       $('#telescope').css('opacity', 1);
       this.tweenIn(['#telescope-number', '#telescope-head', '#telescope-color'], 800);
     } else {
@@ -103,20 +104,24 @@ class App extends Component {
   render() {
     return (
       <div className="container">
-        <div id="navbar">
-          <img id="logo" src={logo}></img>
-        </div>
         <div id="landing">
           <div id="landing-content" className="content">
-            Hello there
+            <p>
+              <span className="letter">H</span>
+              <span className="letter">e</span>
+              <span className="letter">l</span>
+              <span className="letter">l</span>
+              <span className="letter">o</span> &nbsp;
+              <u><span className="letter">t</span>
+              <span className="letter">h</span>
+              <span className="letter">e</span>
+              <span className="letter">r</span>
+              <span className="letter">e</span></u>
+            </p>
           </div>
         </div>
-        <div id="telescope" className="project">
-          <div id="telescope-content" className="content">
-            <p id="telescope-number" className="subhead">01/04</p>
-            <p id="telescope-head" className="head">Telescope</p>
-            <div id="telescope-color"></div>
-          </div>
+        <div id="navbar">
+          <img id="logo" src={logo}></img>
         </div>
       </div>
     );

@@ -4059,7 +4059,7 @@ jest@20.0.4:
   dependencies:
     jest-cli "^20.0.4"
 
-jquery@^3.3.1:
+jquery@^3.1.1, jquery@^3.3.1:
   version "3.3.1"
   resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.3.1.tgz#958ce29e81c9790f31be7792df5d4d95fc57fbca"
 
@@ -6793,6 +6793,12 @@ through@2, through@^2.3.6, through@~2.3, through@~2.3.1:
 thunky@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/thunky/-/thunky-1.0.2.tgz#a862e018e3fb1ea2ec3fce5d55605cf57f247371"
+
+tilt.js@^1.2.1:
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/tilt.js/-/tilt.js-1.2.1.tgz#7d140ecb06744192815735e538b02739fe24d92f"
+  dependencies:
+    jquery "^3.1.1"
 
 time-stamp@^2.0.0:
   version "2.0.0"

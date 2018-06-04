@@ -9,6 +9,7 @@ body {
   top: 0;
   background-color: #000;
   color: #fff;
+  cursor: url('cursor.png'), auto;
 }
 
 .center {
@@ -90,6 +91,10 @@ a {
   }
 }
 
+.letter {
+  position: relative;
+}
+
 .scroll {
   position: absolute;
   width: 100%;
@@ -122,12 +127,14 @@ a {
 }
 
 #navbar {
-  padding: 2rem;
+  padding-bottom: 1rem;
+  width: 100%;
   position: fixed;
-  top: 0;
+  bottom: 0;
+  text-align: center;
 
   img {
-    height: 2.25rem;
+    height: 1.5rem;
   }
 }
 
@@ -137,11 +144,12 @@ a {
   width: 100vw;
 
   #landing-content {
-    left: 15vw;
+    text-align: center;
 
     #landing-head {
       margin-bottom: 1rem;
       font-size: 3.5rem;
+      text-align: center;
     }
 
     #landing-subhead, #landing-subhead-2 {
@@ -149,7 +157,7 @@ a {
     }
 
     p {
-      font-size: 1.35rem;
+      font-size: 1.5rem;
     }
   }
 }
