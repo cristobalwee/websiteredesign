@@ -68,6 +68,17 @@ u {
   u:hover {
     cursor: url("pointer.png"), auto; }
 
+h1 {
+  font-size: 2.25rem;
+  font-weight: 400; }
+
+h2 {
+  font-size: 1.75rem;
+  font-weight: 400; }
+
+p {
+  font-family: 'Inconsolata', monospace; }
+
 .glitch {
   color: white;
   position: relative;
@@ -90,14 +101,26 @@ u {
 
 .letter {
   position: relative;
-  overflow: hidden;
-  height: 1.5rem;
-  line-height: 1.5rem; }
+  display: inline-block; }
 
 .letter-container {
-  position: relative;
-  overflow: hidden;
-  height: 1.5rem; }
+  position: relative; }
+
+#underline {
+  position: absolute;
+  bottom: 0;
+  width: 5.5rem;
+  margin-left: 6px;
+  -webkit-transition: all 0.25s ease;
+  -moz-transition: all 0.25s ease;
+  -ms-transition: all 0.25s ease;
+  -o-transition: all 0.25s ease;
+  transition: all 0.25s ease;
+  -moz-transform: translateY(-10px);
+  -o-transform: translateY(-10px);
+  -ms-transform: translateY(-10px);
+  -webkit-transform: translateY(-10px);
+  transform: translateY(-10px); }
 
 .scroll {
   position: absolute;
@@ -126,6 +149,26 @@ u {
 .subhead {
   font-size: 1.35rem; }
 
+.modal {
+  position: absolute;
+  background-color: #fff;
+  color: black;
+  width: 20rem;
+  padding: 1rem;
+  z-index: 10;
+  opacity: 0;
+  cursor: url("move.png"), auto; }
+  .modal .close > p {
+    font-size: 1.5rem;
+    position: absolute;
+    right: 1rem;
+    top: 0.5rem;
+    width: 3rem;
+    height: 2rem;
+    text-align: right; }
+  .modal:active {
+    cursor: url("drag.png"), auto; }
+
 #navbar {
   padding-bottom: 1rem;
   width: 100%;
@@ -147,8 +190,6 @@ u {
       text-align: center; }
     #landing #landing-content #landing-subhead, #landing #landing-content #landing-subhead-2 {
       font-size: 1.35rem; }
-    #landing #landing-content p {
-      font-size: 1.5rem; }
 
 #telescope {
   height: 100%;
@@ -174,34 +215,34 @@ u {
 
 @keyframes noise-anim {
   0% {
-    clip: rect(1px, 9999px, 29px, 0); }
+    clip: rect(7px, 9999px, 7px, 0); }
   6.66667% {
-    clip: rect(56px, 9999px, 96px, 0); }
+    clip: rect(100px, 9999px, 71px, 0); }
   13.33333% {
-    clip: rect(49px, 9999px, 46px, 0); }
+    clip: rect(41px, 9999px, 12px, 0); }
   20% {
-    clip: rect(25px, 9999px, 48px, 0); }
+    clip: rect(13px, 9999px, 99px, 0); }
   26.66667% {
-    clip: rect(6px, 9999px, 32px, 0); }
+    clip: rect(86px, 9999px, 78px, 0); }
   33.33333% {
-    clip: rect(54px, 9999px, 67px, 0); }
+    clip: rect(86px, 9999px, 5px, 0); }
   40% {
-    clip: rect(26px, 9999px, 24px, 0); }
+    clip: rect(37px, 9999px, 5px, 0); }
   46.66667% {
-    clip: rect(80px, 9999px, 28px, 0); }
+    clip: rect(21px, 9999px, 8px, 0); }
   53.33333% {
-    clip: rect(75px, 9999px, 79px, 0); }
+    clip: rect(86px, 9999px, 8px, 0); }
   60% {
-    clip: rect(17px, 9999px, 91px, 0); }
+    clip: rect(87px, 9999px, 45px, 0); }
   66.66667% {
-    clip: rect(85px, 9999px, 50px, 0); }
+    clip: rect(41px, 9999px, 76px, 0); }
   73.33333% {
-    clip: rect(16px, 9999px, 11px, 0); }
+    clip: rect(73px, 9999px, 3px, 0); }
   80% {
-    clip: rect(68px, 9999px, 75px, 0); }
+    clip: rect(27px, 9999px, 75px, 0); }
   86.66667% {
-    clip: rect(23px, 9999px, 40px, 0); }
+    clip: rect(20px, 9999px, 22px, 0); }
   93.33333% {
-    clip: rect(76px, 9999px, 54px, 0); }
+    clip: rect(14px, 9999px, 95px, 0); }
   100% {
-    clip: rect(46px, 9999px, 21px, 0); } }
+    clip: rect(33px, 9999px, 14px, 0); } }

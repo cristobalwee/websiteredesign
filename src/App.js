@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import $ from 'jquery';
 import anime from 'animejs';
+import Draggable from 'react-draggable';
 import './styles.css';
 
 import logo from './media/logo.svg';
 import line from './media/line.svg';
 import Project from './components/project.js';
+import underline from './media/underline.svg';
 
 // https://kentatoshikura.com/
 // https://theorosel.com/
@@ -17,7 +19,8 @@ class App extends Component {
     super(props);
     this.state = {
       scrollFlag: true,
-      currPos: 0
+      currPos: 0,
+      modalOpen: false
     };
   }
 
@@ -56,11 +59,11 @@ class App extends Component {
     anime.timeline({loop: false})
       .add({
         targets: targets,
-        top: -25,
-        translateZ: 0,
+        translateY: -10,
         opacity: 0,
-        easing: "easeOutExpo",
-        duration: 1000,
+        easing: "easeInCubic",
+        duration: 400,
+        offset: 100,
         delay: function(el, i) {
           return 300 + 30 * i;
         }
@@ -99,17 +102,21 @@ class App extends Component {
 
   scroll(flag) {
     let position = this.state.currPos;
+    if (this.state.modalOpen) {
+      this.setState({ modalOpen: false });
+    }
 
     if (flag) {
       let tl = anime.timeline({
         loop: false
-      })
+      });
+      $('#underline').css('opacity', 0);
       this.tweenUp(['.letter'], 0);
       $('#telescope').css('opacity', 1);
       this.tweenIn(['#telescope-number', '#telescope-head', '#telescope-color'], 800);
     } else {
       if (this.state.currPos === 1) {
-        $("span").addClass("glitch");
+
       }
     }
   }
@@ -118,19 +125,41 @@ class App extends Component {
     return (
       <div className="container">
         <div id="landing">
+          <Draggable
+            className="content"
+            defaultPosition={{x: 50, y: 50}}>
+            <div className="modal" style={this.state.modalOpen ? {display: 'block'} : {display: 'none'}}>
+              <a className="close" onClick={() => {
+                let flag = this.state.modalOpen;
+                this.setState({ modalOpen: !flag });
+              }}><p>x</p></a>
+              <h2>Wtf?</h2>
+              <p>hey my name is cristobal grana and I like to do stuff with the web scroll down if you want to see what kind of stuff ok thank you bye.</p>
+            </div>
+          </Draggable>
           <div id="landing-content" className="content">
-            <span className="letter-container"><p>
+            <h2 className="letter-container">
               <span className="letter">H</span>
               <span className="letter">e</span>
               <span className="letter">l</span>
               <span className="letter">l</span>
               <span className="letter">o</span> &nbsp;
-              <a><u><span className="letter">t</span>
-              <span className="letter">h</span>
-              <span className="letter">e</span>
-              <span className="letter">r</span>
-              <span className="letter">e</span></u></a>
-            </p></span>
+              <a onClick={() => {
+                let flag = this.state.modalOpen;
+                $('.modal').css('opacity', '1');
+                this.setState({ modalOpen: !flag });
+                }}>
+                <span className="letter">t</span>
+                <span className="letter">h</span>
+                <span className="letter">e</span>
+                <span className="letter">r</span>
+                <span className="letter">e</span><br></br>
+                <img id="underline" src={underline}></img>
+              </a>
+            </h2>
+          </div>
+          <div id="works" className="content">
+
           </div>
         </div>
         <div id="navbar">

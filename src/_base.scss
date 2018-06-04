@@ -74,6 +74,20 @@ u {
   }
 }
 
+h1 {
+  font-size: 2.25rem;
+  font-weight: 400;
+}
+
+h2 {
+  font-size: 1.75rem;
+  font-weight: 400;
+}
+
+p {
+  font-family: 'Inconsolata', monospace;
+}
+
 .glitch {
   color: white;
   position: relative;
@@ -103,15 +117,20 @@ u {
 
 .letter {
   position: relative;
-  overflow: hidden;
-  height: 1.5rem;
-  line-height: 1.5rem;
+  display: inline-block;
 }
 
 .letter-container {
   position: relative;
-  overflow: hidden;
-  height: 1.5rem;
+}
+
+#underline {
+  position: absolute;
+  bottom: 0;
+  width: 5.5rem;
+  margin-left: 6px;
+  @include transition(all 0.25s ease);
+  @include transform(translateY(-10px));
 }
 
 .scroll {
@@ -145,6 +164,33 @@ u {
   font-size: 1.35rem;
 }
 
+.modal {
+  position: absolute;
+  background-color: #fff;
+  color: black;
+  width: 20rem;
+  padding: 1rem;
+  z-index: 10;
+  opacity: 0;
+  cursor: url('move.png'), auto;
+
+  .close {
+    > p {
+      font-size: 1.5rem;
+      position: absolute;
+      right: 1rem;
+      top: 0.5rem;
+      width: 3rem;
+      height: 2rem;
+      text-align: right
+    }
+  }
+
+  &:active {
+    cursor: url('drag.png'), auto;
+  }
+}
+
 #navbar {
   padding-bottom: 1rem;
   width: 100%;
@@ -173,10 +219,6 @@ u {
 
     #landing-subhead, #landing-subhead-2 {
       font-size: 1.35rem;
-    }
-
-    p {
-      font-size: 1.5rem;
     }
   }
 }
