@@ -41,33 +41,46 @@ class App extends Component {
   }
 
   tweenUp(targets, delay) {
-    targets.map((target, i) => {
-      anime({
-        targets: target,
-        top: -30,
+    // targets.map((target, i) => {
+    //   anime({
+    //     targets: target,
+    //     top: -30,
+    //     opacity: 0,
+    //     duration: 400,
+    //     easing: 'easeInOutQuint',
+    //     delay: function(el, i) {
+    //       return 100 + 25 * i;
+    //     }
+    //   });
+    // });
+    anime.timeline({loop: false})
+      .add({
+        targets: targets,
+        top: -25,
+        translateZ: 0,
         opacity: 0,
-        duration: 400,
-        easing: 'easeInOutQuint',
+        easing: "easeOutExpo",
+        duration: 1000,
         delay: function(el, i) {
-          return 100 + 30 * i;
+          return 300 + 30 * i;
         }
       });
-    });
   }
 
   tweenDown(targets, delay) {
     targets = targets.reverse();
-    targets.map((target, i) => {
-      anime({
-        targets: target,
-        top: 20,
+    anime.timeline({loop: false})
+      .add({
+        targets: targets,
+        top: 25,
+        translateZ: 0,
         opacity: 0,
-        duration: 400,
-        easing: 'easeInBack',
-        offset: (i * 100),
-        delay: delay
+        easing: "easeOutExpo",
+        duration: 1000,
+        delay: function(el, i) {
+          return 300 + 30 * i;
+        }
       });
-    });
   }
 
   tweenIn(targets, delay) {
@@ -106,18 +119,18 @@ class App extends Component {
       <div className="container">
         <div id="landing">
           <div id="landing-content" className="content">
-            <p>
+            <span className="letter-container"><p>
               <span className="letter">H</span>
               <span className="letter">e</span>
               <span className="letter">l</span>
               <span className="letter">l</span>
               <span className="letter">o</span> &nbsp;
-              <u><span className="letter">t</span>
+              <a><u><span className="letter">t</span>
               <span className="letter">h</span>
               <span className="letter">e</span>
               <span className="letter">r</span>
-              <span className="letter">e</span></u>
-            </p>
+              <span className="letter">e</span></u></a>
+            </p></span>
           </div>
         </div>
         <div id="navbar">

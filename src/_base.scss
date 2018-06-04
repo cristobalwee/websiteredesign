@@ -58,9 +58,19 @@ body {
 
 a {
   text-decoration: none !important;
+  cursor: url('pointer.png'), auto;
 
   &:hover {
     text-decoration: none !important;
+    cursor: url('pointer.png'), auto;
+  }
+}
+
+u {
+  cursor: url('pointer.png'), auto;
+
+  &:hover {
+    cursor: url('pointer.png'), auto;
   }
 }
 
@@ -93,6 +103,15 @@ a {
 
 .letter {
   position: relative;
+  overflow: hidden;
+  height: 1.5rem;
+  line-height: 1.5rem;
+}
+
+.letter-container {
+  position: relative;
+  overflow: hidden;
+  height: 1.5rem;
 }
 
 .scroll {
