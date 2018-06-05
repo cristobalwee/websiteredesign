@@ -127,12 +127,7 @@ p {
   z-index: 999;
   opacity: 0;
   text-align: left;
-  cursor: url("move.png"), auto;
-  -webkit-transition: opacity 0.4s ease;
-  -moz-transition: opacity 0.4s ease;
-  -ms-transition: opacity 0.4s ease;
-  -o-transition: opacity 0.4s ease;
-  transition: opacity 0.4s ease; }
+  cursor: url("move.png"), auto; }
   .modal .close > p {
     font-size: 1.5rem;
     position: absolute;
@@ -241,3 +236,28 @@ p {
       -ms-transform: translateY(-50%);
       -webkit-transform: translateY(-50%);
       transform: translateY(-50%); }
+
+@media screen and (max-width: 768px) {
+  h1 {
+    font-size: 1.75rem;
+    font-weight: 400; }
+  #works #works-container h1 {
+    padding-left: 0;
+    position: relative;
+    top: 50%;
+    -moz-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%); }
+  #color-container #color {
+    width: 250px;
+    height: 150px; }
+    #color-container #color h3 {
+      font-size: 1rem; }
+  .modal {
+    width: 15rem;
+    margin-left: -30px;
+    margin-top: -30px; }
+  #project-modal {
+    margin: 0 !important; } }

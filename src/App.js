@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import $ from 'jquery';
 import anime from 'animejs';
 import Draggable from 'react-draggable';
+import Swipeable from 'react-swipeable';
 import './styles.css';
 
 import logo from './media/logo.svg';
@@ -10,8 +11,6 @@ import Project from './components/project.js';
 import Header from './components/header.js';
 import underline from './media/underline.svg';
 
-// https://kentatoshikura.com/
-// https://theorosel.com/
 // https://gijsroge.github.io/tilt.js/
 // https://codepen.io/frontnerd/pen/JGwvYq
 
@@ -110,6 +109,19 @@ class App extends Component {
         }, 2000);
       }
     });
+  }
+
+  swipedDown() {
+    console.log("Up");
+  }
+
+  swipedUp() {
+    console.log("Down");
+    if (this.state.currPos === 5) {
+      return;
+    }
+
+    this.renderNext(this.state.currPos, this.state.currPos + 1, this.state.targets[this.state.currPos], this.state.targets[this.state.currPos + 1]);
   }
 
   tweenUp(targets, delay) {
@@ -261,11 +273,27 @@ class App extends Component {
   scroll(down) {
     let position = this.state.currPos;
     if (this.state.modalOpen) {
-      this.setState({ modalOpen: false });
+      anime({
+        targets: '.modal',
+        opacity: 0,
+        duration: 100,
+        easing: 'linear'
+      });
+      setTimeout(() => {
+        this.setState({ modalOpen: false });
+      }, 300);
     }
 
     if (this.state.projectOpen) {
-      this.setState({ projectOpen: false });
+      anime({
+        targets: '#project-modal',
+        opacity: 0,
+        duration: 100,
+        easing: 'linear'
+      });
+      setTimeout(() => {
+        this.setState({ projectOpen: false });
+      }, 300);
     }
 
     if (down) {
@@ -283,97 +311,198 @@ class App extends Component {
     }
   }
 
-  renderModal() {
-    let flag = this.state.modalOpen;
-    this.setState({ modalOpen: !flag });
-    $('.modal').css('opacity', 1);
-  }
-
   render() {
     return (
-      <div className="container">
-        <div id="landing">
-          <Draggable defaultPosition={{x: 50, y: 50}}>
-            <div className="modal" style={this.state.modalOpen ? {display: 'block'} : {display: 'none'}}>
-              <a className="close" onClick={() => {
-                let flag = this.state.modalOpen;
-                this.setState({ modalOpen: !flag });
-              }}><p>x</p></a>
-              <h2>Wtf?</h2>
-              <p style={{marginBottom: '1rem'}}>hey my name is cristobal grana and I like to do stuff with the web scroll down if you want to see what kind of stuff ok thank you bye.</p>
-              <p>
-                <a target="_blank" rel="noopener noreferrer" href="https://github.com/cristobalwee" className="link">github</a>&nbsp;
-                <a target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/in/cristobal-grana-samanez" className="link">linkedin</a>&nbsp;
-                <a target="_blank" rel="noreferrer" href="https://twitter.com/cristo_grana" className="link">twitter</a>&nbsp;
-                <a href="mailto:hellothere@cristobalgrana.me" className="link">email</a>
-              </p>
-            </div>
-          </Draggable>
-          <div id="landing-content" className="content">
-            <h2 className="letter-container">
-              <span className="letter-hello">H</span>
-              <span className="letter-hello">e</span>
-              <span className="letter-hello">l</span>
-              <span className="letter-hello">l</span>
-              <span className="letter-hello">o</span> &nbsp;
-              <a onClick={() => {
-                let flag = this.state.modalOpen;
-                $('.modal').css('opacity', '1');
-                this.setState({ modalOpen: !flag });
-                }}>
-                <span className="letter-hello">t</span>
-                <span className="letter-hello">h</span>
+      <Swipeable
+       onSwipedDown={() => {
+         if (this.state.modalOpen) {
+           anime({
+             targets: '.modal',
+             opacity: 0,
+             duration: 100,
+             easing: 'linear'
+           });
+           setTimeout(() => {
+             this.setState({ modalOpen: false });
+           }, 300);
+         }
+
+         if (this.state.projectOpen) {
+           anime({
+             targets: '#project-modal',
+             opacity: 0,
+             duration: 100,
+             easing: 'linear'
+           });
+           setTimeout(() => {
+             this.setState({ projectOpen: false });
+           }, 300);
+         }
+
+         if (this.state.currPos === 0) {
+           return;
+         }
+
+         this.renderNext(this.state.currPos, this.state.currPos - 1, this.state.targets[this.state.currPos], this.state.targets[this.state.currPos - 1]);
+       }}
+       onSwipedUp={() => {
+         if (this.state.modalOpen) {
+           anime({
+             targets: '.modal',
+             opacity: 0,
+             duration: 100,
+             easing: 'linear'
+           });
+           setTimeout(() => {
+             this.setState({ modalOpen: false });
+           }, 300);
+         }
+
+         if (this.state.projectOpen) {
+           anime({
+             targets: '#project-modal',
+             opacity: 0,
+             duration: 100,
+             easing: 'linear'
+           });
+           setTimeout(() => {
+             this.setState({ projectOpen: false });
+           }, 300);
+         }
+
+         if (this.state.currPos === 5) {
+           return;
+         }
+
+         this.renderNext(this.state.currPos, this.state.currPos + 1, this.state.targets[this.state.currPos], this.state.targets[this.state.currPos + 1]);
+       }} >
+        <div className="container">
+          <div id="landing">
+            <Draggable defaultPosition={{x: 50, y: 50}}>
+              <div className="modal" style={this.state.modalOpen ? {display: 'block'} : {display: 'none'}}>
+                <a className="close" onClick={() => {
+                  anime({
+                    targets: '.modal',
+                    opacity: 0,
+                    duration: 100,
+                    easing: 'linear'
+                  });
+                  setTimeout(() => {
+                    this.setState({ modalOpen: false });
+                  }, 300);
+                }}><p>x</p></a>
+                <h2>Here?</h2>
+                <p style={{marginBottom: '1rem'}}>yea hi my name is cristobal grana and I like to do stuff with the web scroll down if you want to see what kind of stuff ok thank you bye.</p>
+                <p>
+                  <a target="_blank" rel="noopener noreferrer" href="https://github.com/cristobalwee" className="link">github</a>&nbsp;
+                  <a target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/in/cristobal-grana-samanez" className="link">linkedin</a>&nbsp;
+                  <a target="_blank" rel="noreferrer" href="https://twitter.com/cristo_grana" className="link">twitter</a>&nbsp;
+                  <a href="mailto:hellothere@cristobalgrana.me" className="link">email</a>
+                </p>
+              </div>
+            </Draggable>
+            <div id="landing-content" className="content">
+              <h2 className="letter-container">
+                <span className="letter-hello">H</span>
                 <span className="letter-hello">e</span>
-                <span className="letter-hello">r</span>
-                <span className="letter-hello">e</span><br></br>
-                <img id="underline" src={underline}></img>
-              </a>
-            </h2>
-          </div>
-        </div>
-        <div id="color-container">
-          <div id="color"><h3 id="indicator">0{this.state.currPos > 0 ? this.state.currPos : 1}/05</h3></div>
-        </div>
-        <div id="works">
-          <div id="works-container" className="content">
-            <div id="project-modal" className="modal" style={this.state.projectOpen ? {display: 'block', opacity: 1} : {display: 'none'}}>
-              <a className="close" onClick={() => {
-                let flag = this.state.projectOpen;
-                this.setState({ projectOpen: !flag });
-              }}><p>x</p></a>
-              <h2>{this.state.projects[this.state.currPos]}</h2>
-              <p style={{marginBottom: '1rem'}}>{this.state.info[this.state.currPos]}</p>
-              <p>
-                {(this.state.github[this.state.currPos]) && <a style={{marginRight: '10px'}} target="_blank" rel="noopener noreferrer" href={this.state.github[this.state.currPos]} className="link">github</a>}
-                {(this.state.links[this.state.currPos]) && <a target="_blank" rel="noopener noreferrer" href={this.state.links[this.state.currPos]} className="link">website</a>}
-              </p>
+                <span className="letter-hello">l</span>
+                <span className="letter-hello">l</span>
+                <span className="letter-hello">o</span> &nbsp;
+                <a onClick={() => {
+                    this.setState({ modalOpen: true });
+                    anime({
+                      targets: '.modal',
+                      opacity: 1,
+                      duration: 100,
+                      easing: 'linear'
+                    });
+                  }}>
+                  <span className="letter-hello">t</span>
+                  <span className="letter-hello">h</span>
+                  <span className="letter-hello">e</span>
+                  <span className="letter-hello">r</span>
+                  <span className="letter-hello">e</span><br></br>
+                  <img id="underline" src={underline}></img>
+                </a>
+              </h2>
             </div>
-            <Header title={"Telescope"} name={"telescope"} handler={() => {
-              let flag = this.state.projectOpen;
-              this.setState({ projectOpen: !flag });
-            }} />
-            <Header title={"Punch Buddy"} name={"punch"} handler={() => {
-              let flag = this.state.projectOpen;
-              this.setState({ projectOpen: !flag });
-            }} spaces={[5]} />
-            <Header title={"GoDaddy"} name={"godaddy"} handler={() => {
-              let flag = this.state.projectOpen;
-              this.setState({ projectOpen: !flag });
-            }} />
-            <Header title={"Gastronomads"} name={"gastronomads"} handler={() => {
-              let flag = this.state.projectOpen;
-              this.setState({ projectOpen: !flag });
-            }} />
-          <Header title={"A Website"} name={"this"} handler={() => {
-              let flag = this.state.projectOpen;
-              this.setState({ projectOpen: !flag });
-            }} spaces={[1]} />
+          </div>
+          <div id="color-container">
+            <div id="color"><h3 id="indicator">0{this.state.currPos > 0 ? this.state.currPos : 1}/05</h3></div>
+          </div>
+          <div id="works">
+            <div id="works-container" className="content">
+              <div id="project-modal" className="modal" style={this.state.projectOpen ? {display: 'block'} : {display: 'none'}}>
+                <a className="close" onClick={() => {
+                  anime({
+                    targets: '#project-modal',
+                    opacity: 0,
+                    duration: 100,
+                    easing: 'linear'
+                  });
+                  setTimeout(() => {
+                    this.setState({ projectOpen: false });
+                  }, 400);
+                }}><p>x</p></a>
+                <h2>{this.state.projects[this.state.currPos]}</h2>
+                <p style={{marginBottom: '1rem'}}>{this.state.info[this.state.currPos]}</p>
+                <p>
+                  {(this.state.github[this.state.currPos]) && <a style={{marginRight: '10px'}} target="_blank" rel="noopener noreferrer" href={this.state.github[this.state.currPos]} className="link">github</a>}
+                  {(this.state.links[this.state.currPos]) && <a target="_blank" rel="noopener noreferrer" href={this.state.links[this.state.currPos]} className="link">website</a>}
+                </p>
+              </div>
+              <Header title={"Telescope"} name={"telescope"} handler={() => {
+                this.setState({ projectOpen: true });
+                anime({
+                  targets: '#project-modal',
+                  opacity: 1,
+                  duration: 100,
+                  easing: 'linear'
+                });
+              }} />
+              <Header title={"Punch Buddy"} name={"punch"} handler={() => {
+                this.setState({ projectOpen: true });
+                anime({
+                  targets: '#project-modal',
+                  opacity: 1,
+                  duration: 100,
+                  easing: 'linear'
+                });
+              }} spaces={[5]} />
+              <Header title={"GoDaddy"} name={"godaddy"} handler={() => {
+                this.setState({ projectOpen: true });
+                anime({
+                  targets: '#project-modal',
+                  opacity: 1,
+                  duration: 100,
+                  easing: 'linear'
+                });
+              }} />
+              <Header title={"Gastronomads"} name={"gastronomads"} handler={() => {
+                this.setState({ projectOpen: true });
+                anime({
+                  targets: '#project-modal',
+                  opacity: 1,
+                  duration: 100,
+                  easing: 'linear'
+                });
+              }} />
+              <Header title={"A Website"} name={"this"} handler={() => {
+                this.setState({ projectOpen: true });
+                anime({
+                  targets: '#project-modal',
+                  opacity: 1,
+                  duration: 100,
+                  easing: 'linear'
+                });
+              }} spaces={[1]} />
+            </div>
+          </div>
+          <div id="navbar">
+            <a onClick={() => this.renderNext(this.state.currPos, 0, this.state.targets[this.state.currPos], this.state.targets[0])}><img id="logo" src={logo}></img></a>
           </div>
         </div>
-        <div id="navbar">
-          <a onClick={() => this.renderNext(this.state.currPos, 0, this.state.targets[this.state.currPos], this.state.targets[0])}><img id="logo" src={logo}></img></a>
-        </div>
-      </div>
+      </Swipeable>
     );
   }
 }
