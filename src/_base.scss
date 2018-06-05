@@ -75,7 +75,7 @@ u {
 }
 
 h1 {
-  font-size: 2.25rem;
+  font-size: 3rem;
   font-weight: 400;
 }
 
@@ -88,9 +88,20 @@ p {
   font-family: 'Inconsolata', monospace;
 }
 
-.letter-hello, .letter-telescope, .letter-godaddy, .letter-gastronomads, .letter-punch, .letter-this {
+.link {
+  text-decoration: underline !important;
+  color: #0100ff;
+}
+
+.letter-hello {
   position: relative;
   display: inline-block;
+}
+
+.letter-telescope, .letter-godaddy, .letter-gastronomads, .letter-punch, .letter-this {
+  position: relative;
+  display: inline-block;
+  opacity: 0;
 }
 
 .letter-container {
@@ -121,8 +132,9 @@ p {
   color: black;
   width: 20rem;
   padding: 1rem;
-  z-index: 10;
+  z-index: 999;
   opacity: 0;
+  text-align: left;
   cursor: url('move.png'), auto;
 
   .close {
@@ -170,6 +182,36 @@ p {
   }
 }
 
+#color-container {
+  position: fixed;
+  height: 100vh;
+  width: 100vw;
+  z-index: -1;
+  opacity: 1;
+  top: 0 !important;
+
+  #color {
+    width: 400px;
+    height: 250px;
+    display: inline-block;
+    position: absolute;
+    left: 50%;
+    top: 50vh;
+    background-color: #000;
+    z-index: -1;
+    //opacity: 0;
+    @include transform(translate(-50%, -50%));
+
+    h3 {
+      font-weight: 400;
+      position: absolute;
+      opacity: 0;
+      top: -2rem;
+      @include transition(all 0.4s ease);
+    }
+  }
+}
+
 #landing {
   position: fixed;
   height: 100vh;
@@ -193,24 +235,11 @@ p {
     height: 35vh;
     text-align: center;
 
-    #color {
-      width: 30vw;
-      height: 35vh;
-      display: inline-block;
-      position: absolute;
-      left: 50%;
-      @include transform(translateX(-50%));
-      background-color: #404e5c;
-      z-index: -1;
+    h1 {
+      padding-left: 15rem;
+      position: relative;
+      top: 50%;
+      @include transform(translateY(-50%));
     }
   }
-}
-
-#telescope {
-  height: 100vh;
-  width: 100vw;
-  position: fixed;
-  opacity: 1;
-  display: none;
-  top: 0 !important;
 }

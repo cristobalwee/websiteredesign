@@ -7,6 +7,7 @@ import './styles.css';
 import logo from './media/logo.svg';
 import line from './media/line.svg';
 import Project from './components/project.js';
+import Header from './components/header.js';
 import underline from './media/underline.svg';
 
 // https://kentatoshikura.com/
@@ -23,22 +24,21 @@ class App extends Component {
       scrollFlag: true,
       currPos: 0,
       modalOpen: false,
-      positions: [
-        "#landing",
-        "#punchbuddy",
-        "#telescope",
-        "#godaddy",
-        "#gastronomads",
-        "#this"
+      colors: [
+        "#000000",
+        "#404e5c",
+        "#13c5cf",
+        "#3fb54f",
+        "#838383",
+        "#0100ff"
       ],
       targets: [
-        ["#landing-head", "#landing-sub-head", "#landing-2-sub-head"],
-        ["#about-head", "#about-info", "#about-contact"],
-        ["#telescope-info", "#telescope-photo"],
-        ["#godaddy-info", "#godaddy-photo"],
-        ["#gastronomads-info", "#gastronomads-photo"],
-        ["#foodful-info", "#foodful-photo"],
-        ["#contact-head", "#contact-sub-head", "#contact-links"]
+        ".letter-hello",
+        ".letter-telescope",
+        ".letter-punch",
+        ".letter-godaddy",
+        ".letter-gastronomads",
+        ".letter-this",
       ]
     };
   }
@@ -83,7 +83,7 @@ class App extends Component {
     anime.timeline({loop: false})
       .add({
         targets: targets,
-        translateY: -10,
+        translateY: -15,
         opacity: 0,
         easing: "easeInCubic",
         duration: 400,
@@ -95,15 +95,14 @@ class App extends Component {
   }
 
   tweenDown(targets, delay) {
-    targets = targets.reverse();
     anime.timeline({loop: false})
       .add({
         targets: targets,
-        top: 25,
-        translateZ: 0,
-        opacity: 0,
-        easing: "easeOutExpo",
-        duration: 1000,
+        translateY: 10,
+        opacity: [1, 0],
+        easing: "easeInCubic",
+        duration: 400,
+        offset: 100,
         delay: function(el, i) {
           return 300 + 30 * i;
         }
@@ -125,13 +124,28 @@ class App extends Component {
       });
   }
 
+  tweenOut(targets, delay) {
+    anime.timeline({loop: false})
+      .add({
+        targets: targets,
+        translateY: [-10, 0],
+        opacity: [0, 1],
+        easing: "easeOutCubic",
+        duration: 400,
+        offset: 100,
+        delay: function(el, i) {
+          return 300 + 30 * i;
+        }
+      });
+  }
+
   tweenColor(targets, color) {
     anime({
       targets: targets,
       backgroundColor: color,
       duration: 800,
       easing: 'easeOutCubic',
-      offset: 1000
+      offset: 500
     });
   }
 
@@ -140,35 +154,84 @@ class App extends Component {
     $(object).css("opacity", "1");
   }
 
-  hide(object, time) {
-    $(object).css("display", "none");
+  hide(object) {
+    setTimeout(() => {
+      $(object).css('display', 'none');
+    }, 1000);
   }
 
-  show(object, time) {
-    $(object).css("display", "block");
+  show(object) {
+    $(object).css("display", "inline-block");
   }
 
   renderNext(curr, next, targetsOut, targetsIn) {
-    console.log(curr + " " + next + " " + targetsIn + " " + targetsOut);
-    this.setState({ currPos: next });
+    if (next > curr) {
+      if (curr === 0) {
+        $('#underline').css('opacity', 0);
+        $('#works').css('z-index', '10');
+        this.tweenUp(targetsOut, 0);
+        this.hide(targetsOut);
+        this.show(targetsIn);
+        this.show('#works');
+        setTimeout(() => {
+          this.tweenColor('#color', this.state.colors[next]);
+          this.tweenIn(targetsIn, 0);
+          $('#indicator').css('opacity', 1);
+          $('#underline').css('display', 'none');
+        }, 1500);
+        this.setState({ currPos: next });
+      } else {
+        this.tweenUp(targetsOut, 0);
+        this.hide(targetsOut);
+        this.show(targetsIn);
+        setTimeout(() => {
+          this.tweenColor('#color', this.state.colors[next]);
+          this.tweenIn(targetsIn, 0);
+        }, 800);
+        this.setState({ currPos: next });
+      }
+    } else {
+      if (next === 0) {
+        $('#indicator').css('opacity', 0);
+        $('#works').css('z-index', -1);
+        this.tweenDown(targetsOut, 0);
+        this.hide(targetsOut);
+        this.tweenColor('#color', this.state.colors[next]);
+        this.hide('#works');
+        this.show('#underline');
+        setTimeout(() => {
+          this.show(targetsIn);
+          this.tweenOut(targetsIn, 0);
+        }, 1000);
+        setTimeout(() => {
+          $('#underline').css('opacity', 1);
+        }, 1400);
+        this.setState({ currPos: next });
+      } else {
+        this.tweenDown(targetsOut, 0);
+        this.hide(targetsOut);
+        setTimeout(() => {
+          this.show(targetsIn);
+          this.tweenColor('#color', this.state.colors[next]);
+          this.tweenOut(targetsIn, 0);
+        }, 1000);
+        this.setState({ currPos: next });
+      }
+    }
   }
 
   scroll(down) {
     let position = this.state.currPos;
-    // if (this.state.modalOpen) {
-    //   this.setState({ modalOpen: false });
-    // }
+    if (this.state.modalOpen) {
+      this.setState({ modalOpen: false });
+    }
 
     if (down) {
-      if (this.state.currPos === 6) {
+      if (this.state.currPos === 5) {
         return;
       }
 
       this.renderNext(this.state.currPos, this.state.currPos + 1, this.state.targets[this.state.currPos], this.state.targets[this.state.currPos + 1]);
-
-      $('#underline').css('opacity', 0);
-      this.tweenUp(['.letter-hello'], 0);
-      this.tweenColor('#color', '#3fb54f');
     } else {
       if (this.state.currPos === 0) {
         return;
@@ -189,7 +252,13 @@ class App extends Component {
                 this.setState({ modalOpen: !flag });
               }}><p>x</p></a>
               <h2>Wtf?</h2>
-              <p>hey my name is cristobal grana and I like to do stuff with the web scroll down if you want to see what kind of stuff ok thank you bye.</p>
+              <p style={{marginBottom: '1rem'}}>hey my name is cristobal grana and I like to do stuff with the web scroll down if you want to see what kind of stuff ok thank you bye.</p>
+              <p>
+                <a target="_blank" rel="noopener noreferrer" href="https://github.com/cristobalwee" className="link">github</a>&nbsp;
+                <a target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/in/cristobal-grana-samanez" className="link">linkedin</a>&nbsp;
+                <a target="_blank" rel="noreferrer" href="https://twitter.com/cristo_grana" className="link">twitter</a>&nbsp;
+                <a href="mailto:hellothere@cristobalgrana.me" className="link">email</a>
+              </p>
             </div>
           </Draggable>
           <div id="landing-content" className="content">
@@ -214,35 +283,16 @@ class App extends Component {
             </h2>
           </div>
         </div>
+        <div id="color-container">
+          <div id="color"><h3 id="indicator">0{this.state.currPos}/05</h3></div>
+        </div>
         <div id="works">
           <div id="works-container" className="content">
-            <div id="color"></div>
-            <h1 className="letter-container">
-              <span className="letter-telescope">T</span>
-              <span className="letter-telescope">e</span>
-              <span className="letter-telescope">l</span>
-              <span className="letter-telescope">e</span>
-              <span className="letter-telescope">s</span>
-              <span className="letter-telescope">c</span>
-              <span className="letter-telescope">o</span>
-              <span className="letter-telescope">p</span>
-              <span className="letter-telescope">e</span>
-            </h1>
-          </div>
-        </div>
-        <div id="telescope">
-          <div id="works-content" className="content">
-            <h1 className="letter-container">
-              <span className="letter-telescope">T</span>
-              <span className="letter-telescope">e</span>
-              <span className="letter-telescope">l</span>
-              <span className="letter-telescope">e</span>
-              <span className="letter-telescope">s</span>
-              <span className="letter-telescope">c</span>
-              <span className="letter-telescope">o</span>
-              <span className="letter-telescope">p</span>
-              <span className="letter-telescope">e</span>
-            </h1>
+            <Header title={"Telescope"} name={"telescope"} />
+            <Header title={"Punch Buddy"} name={"punch"} spaces={[5]} />
+            <Header title={"GoDaddy"} name={"godaddy"} />
+            <Header title={"Gastronomads"} name={"gastronomads"} />
+            <Header title={"This is a website"} name={"this"} spaces={[4, 7, 9]} />
           </div>
         </div>
         <div id="navbar">

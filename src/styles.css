@@ -69,7 +69,7 @@ u {
     cursor: url("pointer.png"), auto; }
 
 h1 {
-  font-size: 2.25rem;
+  font-size: 3rem;
   font-weight: 400; }
 
 h2 {
@@ -79,9 +79,18 @@ h2 {
 p {
   font-family: 'Inconsolata', monospace; }
 
-.letter-hello, .letter-telescope, .letter-godaddy, .letter-gastronomads, .letter-punch, .letter-this {
+.link {
+  text-decoration: underline !important;
+  color: #0100ff; }
+
+.letter-hello {
   position: relative;
   display: inline-block; }
+
+.letter-telescope, .letter-godaddy, .letter-gastronomads, .letter-punch, .letter-this {
+  position: relative;
+  display: inline-block;
+  opacity: 0; }
 
 .letter-container {
   position: relative; }
@@ -115,8 +124,9 @@ p {
   color: black;
   width: 20rem;
   padding: 1rem;
-  z-index: 10;
+  z-index: 999;
   opacity: 0;
+  text-align: left;
   cursor: url("move.png"), auto; }
   .modal .close > p {
     font-size: 1.5rem;
@@ -155,6 +165,38 @@ p {
     font-size: 2.5rem;
     position: relative; }
 
+#color-container {
+  position: fixed;
+  height: 100vh;
+  width: 100vw;
+  z-index: -1;
+  opacity: 1;
+  top: 0 !important; }
+  #color-container #color {
+    width: 400px;
+    height: 250px;
+    display: inline-block;
+    position: absolute;
+    left: 50%;
+    top: 50vh;
+    background-color: #000;
+    z-index: -1;
+    -moz-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%); }
+    #color-container #color h3 {
+      font-weight: 400;
+      position: absolute;
+      opacity: 0;
+      top: -2rem;
+      -webkit-transition: all 0.4s ease;
+      -moz-transition: all 0.4s ease;
+      -ms-transition: all 0.4s ease;
+      -o-transition: all 0.4s ease;
+      transition: all 0.4s ease; }
+
 #landing {
   position: fixed;
   height: 100vh;
@@ -173,24 +215,12 @@ p {
   #works #works-container {
     height: 35vh;
     text-align: center; }
-    #works #works-container #color {
-      width: 30vw;
-      height: 35vh;
-      display: inline-block;
-      position: absolute;
-      left: 50%;
-      -moz-transform: translateX(-50%);
-      -o-transform: translateX(-50%);
-      -ms-transform: translateX(-50%);
-      -webkit-transform: translateX(-50%);
-      transform: translateX(-50%);
-      background-color: #404e5c;
-      z-index: -1; }
-
-#telescope {
-  height: 100vh;
-  width: 100vw;
-  position: fixed;
-  opacity: 1;
-  display: none;
-  top: 0 !important; }
+    #works #works-container h1 {
+      padding-left: 15rem;
+      position: relative;
+      top: 50%;
+      -moz-transform: translateY(-50%);
+      -o-transform: translateY(-50%);
+      -ms-transform: translateY(-50%);
+      -webkit-transform: translateY(-50%);
+      transform: translateY(-50%); }
