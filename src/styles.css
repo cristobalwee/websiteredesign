@@ -89,7 +89,7 @@ p {
 
 .letter-telescope, .letter-godaddy, .letter-gastronomads, .letter-punch, .letter-this {
   position: relative;
-  display: inline-block;
+  display: none;
   opacity: 0; }
 
 .letter-container {
@@ -127,7 +127,12 @@ p {
   z-index: 999;
   opacity: 0;
   text-align: left;
-  cursor: url("move.png"), auto; }
+  cursor: url("move.png"), auto;
+  -webkit-transition: opacity 0.4s ease;
+  -moz-transition: opacity 0.4s ease;
+  -ms-transition: opacity 0.4s ease;
+  -o-transition: opacity 0.4s ease;
+  transition: opacity 0.4s ease; }
   .modal .close > p {
     font-size: 1.5rem;
     position: absolute;
@@ -139,13 +144,25 @@ p {
   .modal:active {
     cursor: url("drag.png"), auto; }
 
+#project-modal {
+  cursor: url("cursor.png"), auto;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -moz-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%); }
+
 #navbar {
   padding-bottom: 1rem;
   width: 100%;
   position: fixed;
   bottom: 0;
   text-align: center;
-  opacity: 0; }
+  opacity: 0;
+  z-index: 999; }
   #navbar img {
     height: 1.5rem; }
 

@@ -28,14 +28,15 @@ class Header extends Component {
 
   render() {
     return (
-      <h1 className="letter-container"><a>
-        {this.state.letterArray.map((letter, i) => {
+      <h1 className="letter-container">
+        <a onClick={this.props.handler}>{this.state.letterArray.map((letter, i) => {
           if (this.props.spaces && this.props.spaces.indexOf(i) !== -1) {
             return <span key={i} className={"letter-" + this.props.name}>&nbsp;</span>
           }
           return <span key={i} className={"letter-" + this.props.name}>{letter}</span>
         })}
-      </a></h1>
+        </a>
+      </h1>
     )
   }
 }

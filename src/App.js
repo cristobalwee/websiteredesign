@@ -24,6 +24,39 @@ class App extends Component {
       scrollFlag: true,
       currPos: 0,
       modalOpen: false,
+      projectOpen: false,
+      projects: [
+        "Hello",
+        "Telescope",
+        "Punch Buddy",
+        "GoDaddy",
+        "Gastronomads",
+        "This is a Website"
+      ],
+      info: [
+        "There",
+        "a vue.js ui framework I've been developing except making frameworks is really hard so I stopped for a bit.",
+        "I never knew what to do when I boxed by myself so I made an app that could help I think it's cool.",
+        "last summer I worked on ui engineering for godaddy's hosting platform and made some react webs and such.",
+        "my brother asked me to make a website for his food writing so I did with a little help from the meteors.",
+        "I like to look at brutalist websites so I wanted to make one except it's not done yet."
+      ],
+      github: [
+        "",
+        "https://github.com/cristobalwee/telescope",
+        "https://github.com/cristobalwee/punchbuddy",
+        "",
+        "https://github.com/cristobalwee/gastronomads",
+        ""
+      ],
+      links: [
+        "",
+        "http://vue-telescope.com/",
+        "https://cristobalwee.github.io/punchbuddyweb/",
+        "https://www.godaddy.com/",
+        "http://gastronomads.co/",
+        "http://awebsite.wtf"
+      ],
       colors: [
         "#000000",
         "#404e5c",
@@ -165,6 +198,10 @@ class App extends Component {
   }
 
   renderNext(curr, next, targetsOut, targetsIn) {
+    if (next === curr) {
+      return;
+    }
+
     if (next > curr) {
       if (curr === 0) {
         $('#underline').css('opacity', 0);
@@ -181,6 +218,7 @@ class App extends Component {
         }, 1500);
         this.setState({ currPos: next });
       } else {
+        this.setState({ projectOpen: false });
         this.tweenUp(targetsOut, 0);
         this.hide(targetsOut);
         this.show(targetsIn);
@@ -226,6 +264,10 @@ class App extends Component {
       this.setState({ modalOpen: false });
     }
 
+    if (this.state.projectOpen) {
+      this.setState({ projectOpen: false });
+    }
+
     if (down) {
       if (this.state.currPos === 5) {
         return;
@@ -239,6 +281,12 @@ class App extends Component {
 
       this.renderNext(this.state.currPos, this.state.currPos - 1, this.state.targets[this.state.currPos], this.state.targets[this.state.currPos - 1]);
     }
+  }
+
+  renderModal() {
+    let flag = this.state.modalOpen;
+    this.setState({ modalOpen: !flag });
+    $('.modal').css('opacity', 1);
   }
 
   render() {
@@ -284,19 +332,46 @@ class App extends Component {
           </div>
         </div>
         <div id="color-container">
-          <div id="color"><h3 id="indicator">0{this.state.currPos}/05</h3></div>
+          <div id="color"><h3 id="indicator">0{this.state.currPos > 0 ? this.state.currPos : 1}/05</h3></div>
         </div>
         <div id="works">
           <div id="works-container" className="content">
-            <Header title={"Telescope"} name={"telescope"} />
-            <Header title={"Punch Buddy"} name={"punch"} spaces={[5]} />
-            <Header title={"GoDaddy"} name={"godaddy"} />
-            <Header title={"Gastronomads"} name={"gastronomads"} />
-            <Header title={"This is a website"} name={"this"} spaces={[4, 7, 9]} />
+            <div id="project-modal" className="modal" style={this.state.projectOpen ? {display: 'block', opacity: 1} : {display: 'none'}}>
+              <a className="close" onClick={() => {
+                let flag = this.state.projectOpen;
+                this.setState({ projectOpen: !flag });
+              }}><p>x</p></a>
+              <h2>{this.state.projects[this.state.currPos]}</h2>
+              <p style={{marginBottom: '1rem'}}>{this.state.info[this.state.currPos]}</p>
+              <p>
+                {(this.state.github[this.state.currPos]) && <a style={{marginRight: '10px'}} target="_blank" rel="noopener noreferrer" href={this.state.github[this.state.currPos]} className="link">github</a>}
+                {(this.state.links[this.state.currPos]) && <a target="_blank" rel="noopener noreferrer" href={this.state.links[this.state.currPos]} className="link">website</a>}
+              </p>
+            </div>
+            <Header title={"Telescope"} name={"telescope"} handler={() => {
+              let flag = this.state.projectOpen;
+              this.setState({ projectOpen: !flag });
+            }} />
+            <Header title={"Punch Buddy"} name={"punch"} handler={() => {
+              let flag = this.state.projectOpen;
+              this.setState({ projectOpen: !flag });
+            }} spaces={[5]} />
+            <Header title={"GoDaddy"} name={"godaddy"} handler={() => {
+              let flag = this.state.projectOpen;
+              this.setState({ projectOpen: !flag });
+            }} />
+            <Header title={"Gastronomads"} name={"gastronomads"} handler={() => {
+              let flag = this.state.projectOpen;
+              this.setState({ projectOpen: !flag });
+            }} />
+          <Header title={"A Website"} name={"this"} handler={() => {
+              let flag = this.state.projectOpen;
+              this.setState({ projectOpen: !flag });
+            }} spaces={[1]} />
           </div>
         </div>
         <div id="navbar">
-          <img id="logo" src={logo}></img>
+          <a onClick={() => this.renderNext(this.state.currPos, 0, this.state.targets[this.state.currPos], this.state.targets[0])}><img id="logo" src={logo}></img></a>
         </div>
       </div>
     );

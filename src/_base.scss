@@ -100,7 +100,7 @@ p {
 
 .letter-telescope, .letter-godaddy, .letter-gastronomads, .letter-punch, .letter-this {
   position: relative;
-  display: inline-block;
+  display: none;
   opacity: 0;
 }
 
@@ -136,6 +136,7 @@ p {
   opacity: 0;
   text-align: left;
   cursor: url('move.png'), auto;
+  @include transition(opacity 0.4s ease);
 
   .close {
     > p {
@@ -154,6 +155,14 @@ p {
   }
 }
 
+#project-modal {
+  cursor: url('cursor.png'), auto;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  @include transform(translate(-50%, -50%));
+}
+
 #navbar {
   padding-bottom: 1rem;
   width: 100%;
@@ -161,6 +170,7 @@ p {
   bottom: 0;
   text-align: center;
   opacity: 0;
+  z-index: 999;
 
   img {
     height: 1.5rem;
