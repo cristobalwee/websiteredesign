@@ -499,7 +499,32 @@ class App extends Component {
             </div>
           </div>
           <div id="navbar">
-            <a onClick={() => this.renderNext(this.state.currPos, 0, this.state.targets[this.state.currPos], this.state.targets[0])}><img id="logo" src={logo}></img></a>
+            <a onClick={() => {
+              if (this.state.modalOpen) {
+                anime({
+                  targets: '.modal',
+                  opacity: 0,
+                  duration: 100,
+                  easing: 'linear'
+                });
+                setTimeout(() => {
+                  this.setState({ modalOpen: false });
+                }, 300);
+              }
+
+              if (this.state.projectOpen) {
+                anime({
+                  targets: '#project-modal',
+                  opacity: 0,
+                  duration: 100,
+                  easing: 'linear'
+                });
+                setTimeout(() => {
+                  this.setState({ projectOpen: false });
+                  this.renderNext(this.state.currPos, 0, this.state.targets[this.state.currPos], this.state.targets[0]);
+                }, 300);
+              }
+              }}><img id="logo" src={logo}></img></a>
           </div>
         </div>
       </Swipeable>
