@@ -111,19 +111,6 @@ class App extends Component {
     });
   }
 
-  swipedDown() {
-    console.log("Up");
-  }
-
-  swipedUp() {
-    console.log("Down");
-    if (this.state.currPos === 5) {
-      return;
-    }
-
-    this.renderNext(this.state.currPos, this.state.currPos + 1, this.state.targets[this.state.currPos], this.state.targets[this.state.currPos + 1]);
-  }
-
   tweenUp(targets, delay) {
     anime.timeline({loop: false})
       .add({
@@ -500,6 +487,10 @@ class App extends Component {
           </div>
           <div id="navbar">
             <a onClick={() => {
+              if (this.state.currPos === 0) {
+                return;
+              }
+
               if (this.state.modalOpen) {
                 anime({
                   targets: '.modal',
@@ -521,9 +512,10 @@ class App extends Component {
                 });
                 setTimeout(() => {
                   this.setState({ projectOpen: false });
-                  this.renderNext(this.state.currPos, 0, this.state.targets[this.state.currPos], this.state.targets[0]);
                 }, 300);
               }
+
+              this.renderNext(this.state.currPos, 0, this.state.targets[this.state.currPos], this.state.targets[0]);
               }}><img id="logo" src={logo}></img></a>
           </div>
         </div>
